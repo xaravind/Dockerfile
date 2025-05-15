@@ -1,2 +1,2 @@
-FROM centos:7
-RUN yum install nginx -y
+FROM almalinux:9
+RUN dnf install nginx -y
