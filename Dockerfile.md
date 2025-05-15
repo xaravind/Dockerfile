@@ -84,32 +84,6 @@ docker inspect <image-id or image-name>
 
 ---
 
-## Pushing Images
-
-### To Docker Hub
-
-```bash
-docker login              # Authenticate with Docker Hub
-docker tag image-name username/image-name:version
-docker push username/image-name:version
-```
-
-### To Nexus
-
-```bash
-docker tag image-name label.<nexus-url>/username/image-name:v1
-docker push label.<nexus-url>/username/image-name:v1
-```
-
-You can push images to:
-
-* Docker Hub
-* Nexus
-* Amazon ECR
-* JFrog Artifactory
-
----
-
 ## ENV
 
 The `ENV` instruction sets **environment variables** inside the container. These variables persist when the container is started from the image.
@@ -286,5 +260,30 @@ ONBUILD COPY index.html /usr/share/nginx/html/index.html
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
+---
+## Pushing Images
+
+### To Docker Hub
+
+```bash
+docker login              # Authenticate with Docker Hub
+docker tag image-name username/image-name:version
+docker push username/image-name:version
+```
+
+### To Nexus
+
+```bash
+docker tag image-name label.<nexus-url>/username/image-name:v1
+docker push label.<nexus-url>/username/image-name:v1
+```
+
+You can push images to:
+
+* Docker Hub
+* Nexus
+* Amazon ECR
+* JFrog Artifactory
+  
 ---
 
