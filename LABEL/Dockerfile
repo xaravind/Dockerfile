@@ -1,5 +1,4 @@
 FROM almalinux:9
-LABEL author="arvind" \
-    veriosn ="1.0" \
-    description= "########"
-
+LABEL author="aravind" \
+      version="1.0"
+      description="########"
