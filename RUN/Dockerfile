@@ -1,2 +1,2 @@
 FROM centos:7
-RUN dnf install nginx -y
+RUN yum install nginx -y
