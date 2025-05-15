@@ -1,0 +1,6 @@
+
+CREATE USER IF NOT EXISTS 'admin'@'backend' IDENTIFIED BY 'Admin@1234!';
+
+GRANT ALL PRIVILEGES ON aja_lib.* TO 'admin'@'backend' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
