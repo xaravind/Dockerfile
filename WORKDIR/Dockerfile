@@ -1,4 +1,4 @@
-FROM almalinux:1.0
+FROM almalinux:9
 RUN mkdir /app
 # RUN cd /app
 # above command won't work in dockerimage, so we will use WORKDIR to change the dir..
