@@ -1,5 +1,5 @@
 # Stage 1: Build with Maven (Eclipse Temurin JDK 24 on Alpine)
-FROM maven:3.9-eclipse-temurin-24-alpine AS build
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN mvn package -DskipTests
 
 
 # Stage 2: Runtime with OpenJDK 17 JRE slim
-FROM openjdk:25-slim-bullseye
+FROM openjdk:21-slim
 
 WORKDIR /app
 
@@ -27,3 +27,4 @@ USER ajabackend
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+
