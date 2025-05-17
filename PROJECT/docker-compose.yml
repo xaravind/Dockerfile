@@ -1,0 +1,25 @@
+volumes:
+  mysql:
+services:
+  mysql:
+    image: mysql:1.0
+    container_name: mysql # --name mysql
+    volumes:
+    - source: mysql
+      target: /var/lib/mysql
+      type: volume # -v volume-name:/path/in/container
+  backend:
+    image: backend:1.0
+    container_name: backend
+    command: sh -c "sleep 20"
+    depends_on: 
+    - mysql
+    ports:
+    - "8080:8080"
+  frontend:
+    image: frontend:1.0
+    container_name: frontend
+    depends_on:
+    - backend
+    ports:
+    - "80:80"
