@@ -1,25 +1,53 @@
 volumes:
-  mysql:
+  mysql_data:
+
+networks:
+  app_net:
+    driver: bridge
+
 services:
   mysql:
-    image: mysql:1.0
-    container_name: mysql # --name mysql
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin@123
+      MYSQL_DATABASE: aja_lib
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Admin@1234!
     volumes:
-    - source: mysql
-      target: /var/lib/mysql
-      type: volume # -v volume-name:/path/in/container
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uadmin", "-pAdmin@1234!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   backend:
     image: backend:1.0
     container_name: backend
-    command: sh -c "sleep 20"
-    depends_on: 
-    - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
     ports:
-    - "8080:8080"
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/aja_lib
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: Admin@1234!
+      SERVER_ADDRESS: 0.0.0.0
+    networks:
+      - app_net
+
   frontend:
     image: frontend:1.0
     container_name: frontend
     depends_on:
-    - backend
+      - backend
     ports:
-    - "80:80"
+      - "80:80"
+    networks:
+      - app_net
