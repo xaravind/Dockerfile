@@ -16,7 +16,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 # Set environment variables for MySQL connection
-ENV SPRING_DATASOURCE_URL=jdbc:mysql://13.217.197.65:3306/sample \
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://13.217.197.65:3306/aja_lib \
     SPRING_DATASOURCE_USERNAME=admin \
     SPRING_DATASOURCE_PASSWORD=Admin@1234!
 
