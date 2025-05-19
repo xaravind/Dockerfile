@@ -1,3 +1,4 @@
+# Stage 1: Build the frontend using Node
 FROM node:lts-alpine3.20 AS build
 
 WORKDIR /app
@@ -8,11 +9,20 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: Serve the built app using Nginx
+# Stage 2: Serve the app using NGINX
 FROM nginx:alpine
 
-# Copy built app to Nginx's html directory
+# Remove default nginx config if exists
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy built app to nginx html directory
 COPY --from=build /app/dist/ /usr/share/nginx/html
 
-# Copy custom Nginx config
+# Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port
+EXPOSE 80
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
