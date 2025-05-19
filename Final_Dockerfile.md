@@ -462,7 +462,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 ---
 
-### ✅ Following best practices: minimal base image, fewer layers, and running as **non-root** user for enhanced security!
+> ✅ Following best practices: minimal base image, fewer layers, and running as **non-root** user for enhanced security!
 
 ### 1. **Minimal base image**
 
